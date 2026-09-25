@@ -5,26 +5,15 @@ import addimg from '../assets/add.gif'
 const Manager = () => {
     const [form, setform] = useState({ website: "", username: "", password: "" })
     const ref = useRef()
-    const inputref = useRef()
     const [passwordArray, setPasswordArray] = useState([])
 
-    let passwords;
     useEffect(() => {
-        passwords = localStorage.getItem("passwords")
-        if (passwords) {
-            setPasswordArray(JSON.parse(passwords))
+        localStorage.setItem("passwords", JSON.stringify(passwordArray))
 
-
-        }
-    }, [])
+    }, [passwordArray])
 
     const savePassword = (e) => {
-        setPasswordArray([...passwordArray, form])
-        localStorage.setItem("passwords", JSON.stringify([...passwordArray, form]))
-        setform({...form, website: "", username: "",password: ""})
-
-        console.log(passwordArray)
-
+        setPasswordArray([...JSON.parse(localStorage.getItem("passwords")), form])
 
     }
     const handleChange = (e) => {
@@ -59,11 +48,11 @@ const Manager = () => {
 
                 <div>Your Own Password Manager</div>
 
-                <input  value={form.website} onChange={handleChange} placeholder='Enter Website url' className=' border border-blue-500 rounded-full p-3 my-6 w-full' type="text" name='website' />
+                <input value={form.website} onChange={handleChange} placeholder='Enter Website url' className=' border border-blue-500 rounded-full p-3 my-6 w-full' type="text" name='website' />
                 <div className='flex gap-2.5 w-full'>
-                    <input  value={form.username} onChange={handleChange} placeholder='Enter Username' className='border border-blue-500 rounded-full w-1/2 p-2' type="text" name='username' />
+                    <input value={form.username} onChange={handleChange} placeholder='Enter Username' className='border border-blue-500 rounded-full w-1/2 p-2' type="text" name='username' />
                     <div ref={ref} className="relative w-1/2 ">
-                        <input  value={form.password} onChange={handleChange} placeholder='Enter Password' className='border border-blue-500 rounded-full w-full p-2' type='password' name='password' />
+                        <input value={form.password} onChange={handleChange} placeholder='Enter Password' className='border border-blue-500 rounded-full w-full p-2' type='password' name='password' />
                         <span className='absolute right-[20px] top-[8px] cursor-pointer' onClick={showPassword}>
                             <img src="/close-eye.svg" alt="" />
                         </span>
