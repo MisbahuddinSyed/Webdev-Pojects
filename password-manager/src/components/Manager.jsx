@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const Manager = () => {
@@ -26,7 +27,18 @@ const Manager = () => {
 
     const copyText = (text) => {
         navigator.clipboard.writeText(text);
-        alert('"' + text + '" Copied to clipboard')
+        
+        toast.info('Copied to clipboard!', {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            
+        });
     };
 
     const showPassword = () => {
@@ -63,9 +75,22 @@ const Manager = () => {
 
     return (
         <>
-            <div className='absolute inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#bfdbfe_1px,transparent_1px)] [background-size:16px_16px]'>
+            <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                
+            />
+            <div className='fixed inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#bfdbfe_1px,transparent_1px)] [background-size:16px_16px]'>
             </div>
-            <div className="container flex flex-col items-center justify-center mx-auto p-10 py-12 w-2/3 text-black">
+            <div className="container flex flex-col items-center justify-center mx-auto p-10 py-12 w-2/3 text-black max-[540px]:w-full max-[540px]:px-3 ">
 
                 <div className="logo font-bold text-5xl">
                     <span className="text-blue-500">&lt;</span>
@@ -74,9 +99,9 @@ const Manager = () => {
                 <div>Your Own Password Manager</div>
 
                 <input value={form.website} onChange={handleChange} placeholder='Enter Website url' className=' border border-blue-500 rounded-full p-3 my-6 w-full' type="text" name='website' />
-                <div className='flex gap-2.5 w-full'>
-                    <input value={form.username} onChange={handleChange} placeholder='Enter Username' className='border border-blue-500 rounded-full w-1/2 p-2' type="text" name='username' />
-                    <div ref={ref} className="relative w-1/2 ">
+                <div className='flex gap-2.5 w-full max-[640px]:flex-col max-[640px]:items-center'>
+                    <input value={form.username} onChange={handleChange} placeholder='Enter Username' className='border border-blue-500 rounded-full w-1/2 p-2 max-[640px]:w-full' type="text" name='username' />
+                    <div ref={ref} className="relative w-1/2 max-[640px]:w-full ">
                         <input value={form.password} onChange={handleChange} placeholder='Enter Password' className='border border-blue-500 rounded-full w-full p-2' type='password' name='password' />
                         <span className='absolute right-[20px] top-[8px] cursor-pointer' onClick={showPassword}>
                             <img src="/close-eye.svg" alt="" />
@@ -92,7 +117,7 @@ const Manager = () => {
                     <h2 className='text-3xl'>Your Passwords</h2>
                     {passwordArray.length === 0 && <h2 className='text-3xl'>No passwords to display</h2>}
                     {passwordArray.length != 0 &&
-                        <table className="table-auto  p-2.5">
+                        <table className="table-auto w-full mx-auto mb-12 p-2.5 max-[540px]:table-fixed max-[540px]:text-xs">
                             <thead className='bg-blue-500 text-white'>
                                 <tr>
                                     <th className='p-4 border border-white'>Website</th>
