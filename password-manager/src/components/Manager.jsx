@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
-import addimg from '../assets/add.gif'
+import { v4 as uuidv4 } from 'uuid';
 
 
 const Manager = () => {
@@ -19,15 +19,15 @@ const Manager = () => {
     }
 
     const savePassword = (e) => {
-        setPasswordArray([...JSON.parse(localStorage.getItem("passwords")), form])
+        setPasswordArray([...JSON.parse(localStorage.getItem("passwords")), { ...form, id: uuidv4() }])
         setform({ website: "", username: "", password: "" })
 
     }
 
     const copyText = (text) => {
-    navigator.clipboard.writeText(text);
-    alert('"'+text+ '" Copied to clipboard')
-};
+        navigator.clipboard.writeText(text);
+        alert('"' + text + '" Copied to clipboard')
+    };
 
     const showPassword = () => {
         if (ref.current.querySelector("input").type == "password") {
@@ -43,6 +43,23 @@ const Manager = () => {
             ref.current.querySelector("span").querySelector("img").src = "/open-eye.svg"
         }
     }
+
+    const deletePass = (id) => {
+
+        let c = confirm("Do you really want to delete this record?")
+        if (c) {
+            setPasswordArray(passwordArray.filter(item => item.id != id))
+        }
+    }
+
+
+    const editPass = (id) => {
+        setform(passwordArray.filter(item => item.id === id)[0])
+        setPasswordArray(passwordArray.filter(item => item.id != id))
+
+    }
+
+
 
     return (
         <>
@@ -68,7 +85,7 @@ const Manager = () => {
                 </div>
                 <button onClick={savePassword} className='flex justify-center items-center bg-blue-500 rounded-full h-fit w-fit p-2 px-4 m-10 hover:bg-purple-300 text-white'>
                     <img className='size-10' src="/add.svg" alt="" />
-                    ADD PASSWORD
+                    SAVE
                 </button>
 
                 <div className='display-pass w-full flex flex-col gap-5 '>
@@ -81,33 +98,44 @@ const Manager = () => {
                                     <th className='p-4 border border-white'>Website</th>
                                     <th className='p-4 border border-white'>Username</th>
                                     <th className='p-4 border border-white'>Password</th>
+                                    <th className='p-4 border border-white'>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {passwordArray.map((item, index) => {
-                                    return <tr key={index}> 
+                                    return <tr key={index}>
                                         <td className='p-4 border border-purple-300'>
                                             <div className="flex">
-                                            {item.website}
-                                            <div className="copy ml-auto cursor-pointer hover:bg-blue-500" onClick={()=>{copyText(item.website)}}>
-                                                <img  src="/copy.svg" alt="" />
-                                            </div>
+                                                {item.website}
+                                                <div className="copy ml-auto cursor-pointer hover:bg-blue-500" onClick={() => { copyText(item.website) }}>
+                                                    <img src="/copy.svg" alt="" />
+                                                </div>
                                             </div>
                                         </td>
                                         <td className='p-4 border border-purple-300'>
                                             <div className="flex">
-                                            {item.username}
-                                            <div className="copy ml-auto cursor-pointer hover:bg-blue-500" onClick={()=>{copyText(item.username)}}>
-                                                <img  src="/copy.svg" alt="" />
-                                            </div>
+                                                {item.username}
+                                                <div className="copy ml-auto cursor-pointer hover:bg-blue-500" onClick={() => { copyText(item.username) }}>
+                                                    <img src="/copy.svg" alt="" />
+                                                </div>
                                             </div>
                                         </td>
                                         <td className='p-4 border border-purple-300'>
                                             <div className="flex">
-                                            {item.password}
-                                            <div className="copy ml-auto cursor-pointer hover:bg-blue-500" onClick={()=>{copyText(item.password)}}>
-                                                <img  src="/copy.svg" alt="" />
+                                                {item.password}
+                                                <div className="copy ml-auto cursor-pointer hover:bg-blue-500" onClick={() => { copyText(item.password) }}>
+                                                    <img src="/copy.svg" alt="" />
+                                                </div>
                                             </div>
+                                        </td>
+                                        <td className='p-2 border border-purple-300 '>
+                                            <div className='flex justify-center gap-10'>
+                                                <div className="cursor-pointer" onClick={() => { editPass(item.id) }}>
+                                                    <img src="/edit.svg" alt="" />
+                                                </div>
+                                                <div className="cursor-pointer" onClick={() => { deletePass(item.id) }}>
+                                                    <img src="/delete.svg" alt="" />
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>
