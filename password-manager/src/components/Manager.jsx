@@ -5,21 +5,29 @@ import addimg from '../assets/add.gif'
 const Manager = () => {
     const [form, setform] = useState({ website: "", username: "", password: "" })
     const ref = useRef()
-    const [passwordArray, setPasswordArray] = useState([])
+    const [passwordArray, setPasswordArray] = useState(() => {
+        return JSON.parse(localStorage.getItem("passwords")) || [];
+    });
 
     useEffect(() => {
         localStorage.setItem("passwords", JSON.stringify(passwordArray))
 
     }, [passwordArray])
 
-    const savePassword = (e) => {
-        setPasswordArray([...JSON.parse(localStorage.getItem("passwords")), form])
-
-    }
     const handleChange = (e) => {
         setform({ ...form, [e.target.name]: e.target.value })
     }
 
+    const savePassword = (e) => {
+        setPasswordArray([...JSON.parse(localStorage.getItem("passwords")), form])
+        setform({ website: "", username: "", password: "" })
+
+    }
+
+    const copyText = (text) => {
+    navigator.clipboard.writeText(text);
+    alert('"'+text+ '" Copied to clipboard')
+};
 
     const showPassword = () => {
         if (ref.current.querySelector("input").type == "password") {
@@ -58,10 +66,57 @@ const Manager = () => {
                         </span>
                     </div>
                 </div>
-                <button onClick={savePassword} className='flex justify-center items-center bg-blue-300 rounded-full h-fit w-fit p-2 px-4 m-10 hover:bg-blue-500'>
-                    <img className='size-10' src={addimg} alt="" />
+                <button onClick={savePassword} className='flex justify-center items-center bg-blue-500 rounded-full h-fit w-fit p-2 px-4 m-10 hover:bg-purple-300 text-white'>
+                    <img className='size-10' src="/add.svg" alt="" />
                     ADD PASSWORD
                 </button>
+
+                <div className='display-pass w-full flex flex-col gap-5 '>
+                    <h2 className='text-3xl'>Your Passwords</h2>
+                    {passwordArray.length === 0 && <h2 className='text-3xl'>No passwords to display</h2>}
+                    {passwordArray.length != 0 &&
+                        <table className="table-auto  p-2.5">
+                            <thead className='bg-blue-500 text-white'>
+                                <tr>
+                                    <th className='p-4 border border-white'>Website</th>
+                                    <th className='p-4 border border-white'>Username</th>
+                                    <th className='p-4 border border-white'>Password</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {passwordArray.map((item, index) => {
+                                    return <tr key={index}> 
+                                        <td className='p-4 border border-purple-300'>
+                                            <div className="flex">
+                                            {item.website}
+                                            <div className="copy ml-auto cursor-pointer hover:bg-blue-500" onClick={()=>{copyText(item.website)}}>
+                                                <img  src="/copy.svg" alt="" />
+                                            </div>
+                                            </div>
+                                        </td>
+                                        <td className='p-4 border border-purple-300'>
+                                            <div className="flex">
+                                            {item.username}
+                                            <div className="copy ml-auto cursor-pointer hover:bg-blue-500" onClick={()=>{copyText(item.username)}}>
+                                                <img  src="/copy.svg" alt="" />
+                                            </div>
+                                            </div>
+                                        </td>
+                                        <td className='p-4 border border-purple-300'>
+                                            <div className="flex">
+                                            {item.password}
+                                            <div className="copy ml-auto cursor-pointer hover:bg-blue-500" onClick={()=>{copyText(item.password)}}>
+                                                <img  src="/copy.svg" alt="" />
+                                            </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                })}
+
+
+                            </tbody>
+                        </table>}
+                </div>
 
             </div>
         </>
