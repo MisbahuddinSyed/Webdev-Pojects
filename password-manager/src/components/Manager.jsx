@@ -10,34 +10,66 @@ const Manager = () => {
         return JSON.parse(localStorage.getItem("passwords")) || [];
     });
 
-    useEffect(() => {
-        localStorage.setItem("passwords", JSON.stringify(passwordArray))
 
-    }, [passwordArray])
+    const getPasswords = async () => {
+        const response = await fetch('http://localhost:3000/');
+        const passwords = await response.json();
+        setPasswordArray(passwords)
+    }
+
+    useEffect(() => {
+        getPasswords();
+
+
+    }, [form])
 
     const handleChange = (e) => {
         setform({ ...form, [e.target.name]: e.target.value })
     }
 
-    const savePassword = (e) => {
-        setPasswordArray([...JSON.parse(localStorage.getItem("passwords")), { ...form, id: uuidv4() }])
+    const savePassword = async (e) => {
+
+        const response = await fetch(
+            'http://localhost:3000/',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(form)
+            }
+        );
+        const result = await response.json();
+
+        setPasswordArray([...passwordArray, result])
         setform({ website: "", username: "", password: "" })
-
-    }
-
-    const copyText = (text) => {
-        navigator.clipboard.writeText(text);
-        
-        toast.info('Copied to clipboard!', {
+        toast.info('Password Saved!', {
             position: "bottom-left",
-            autoClose: 5000,
+            autoClose: 2500,
             hideProgressBar: false,
             closeOnClick: false,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
             theme: "dark",
-            
+
+        });
+
+    }
+
+    const copyText = (text) => {
+        navigator.clipboard.writeText(text);
+
+        toast.info('Copied to clipboard!', {
+            position: "bottom-left",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+
         });
     };
 
@@ -56,18 +88,47 @@ const Manager = () => {
         }
     }
 
-    const deletePass = (id) => {
+    const deletePass = async(id) => {
 
         let c = confirm("Do you really want to delete this record?")
         if (c) {
-            setPasswordArray(passwordArray.filter(item => item.id != id))
+            const response = await fetch(
+            `http://localhost:3000/${id}`,
+            {
+                method: 'DELETE'
+            }
+        );
+        getPasswords();
+        const result = await response.json();
+        if(result === true){
+
+            toast.info('Password deleted!', {
+            position: "bottom-left",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+
+        });
+        }
         }
     }
 
 
-    const editPass = (id) => {
-        setform(passwordArray.filter(item => item.id === id)[0])
-        setPasswordArray(passwordArray.filter(item => item.id != id))
+    const editPass = async(id) => {
+
+        const response = await fetch(`http://localhost:3000/${id}`);
+        const password = await response.json();
+        setform(password);
+        const response2 = await fetch(
+            `http://localhost:3000/${id}`,
+            {
+                method: 'DELETE'
+            });
+
 
     }
 
@@ -86,7 +147,7 @@ const Manager = () => {
                 draggable
                 pauseOnHover
                 theme="dark"
-                
+
             />
             <div className='fixed inset-0 -z-10 h-full w-full bg-white bg-[radial-gradient(#bfdbfe_1px,transparent_1px)] [background-size:16px_16px]'>
             </div>
@@ -155,10 +216,10 @@ const Manager = () => {
                                         </td>
                                         <td className='p-2 border border-purple-300 '>
                                             <div className='flex justify-center gap-10'>
-                                                <div className="cursor-pointer" onClick={() => { editPass(item.id) }}>
+                                                <div className="cursor-pointer" onClick={() => { editPass(item._id) }}>
                                                     <img src="/edit.svg" alt="" />
                                                 </div>
-                                                <div className="cursor-pointer" onClick={() => { deletePass(item.id) }}>
+                                                <div className="cursor-pointer" onClick={() => { deletePass(item._id) }}>
                                                     <img src="/delete.svg" alt="" />
                                                 </div>
                                             </div>
