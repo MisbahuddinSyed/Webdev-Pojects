@@ -1,69 +1,46 @@
-import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.js
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <div>
+        <div className="container mx-auto flex flex-col justify-center items-center gap-3 mt-22 mb-25">
+          <div className="title flex text-6xl font-bold">
+            Get Me a Chai <span><img className='w-20' src="/tea.gif" alt="" /></span>
+          </div>
+          <p className='text-lg font-light'>A crowdfunding platform for creators to fund their projects.</p>
+          <p className='text-lg font-light'>A place where your fans can buy you a chai. Unleash the power of your fans and get your projects funded.</p>
+          <div className="flex gap-3 m-5">
+            <button className="rounded-lg text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5">Start Here</button>
+            <button className="rounded-lg text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5">Purple to Blue</button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="bg-white opacity-20 w-full h-1"></div>
+        <div className="container flex flex-col justify-center items-center mx-auto mt-15">
+          <div className="title text-3xl font-bold">
+            Your Fans can Buy you a Chai
+          </div>
+          <div className="icons flex justify-between gap-50 mt-16 mb-30">
+            <div className="flex flex-col justify-center items-center gap-2">
+              <img className='w-22 bg-white rounded-full p-2' src="/man.gif" alt="" />
+              <p className="font-bold">Your fans want to Help</p>
+              <p>Your fans are available to support you</p>
+            </div>
+            <div className="flex flex-col justify-center items-center gap-2">
+              <img className='w-22 bg-white rounded-full p-2' src="/coin.gif" alt="" />
+              <p className="font-bold">Your fans want to Contribute</p>
+              <p>Your fans are available to support you</p>
+            </div>
+            <div className="flex flex-col justify-center items-center gap-2">
+              <img className='w-22 bg-white rounded-full p-2' src="/talk.gif" alt="" />
+              <p className="font-bold">Your fans want to Collaborate</p>
+              <p>Your fans are available to support you</p>
+            </div>
+          </div>
+
         </div>
-      </main>
-    </div>
+          <div className="bg-white opacity-20 w-full h-1"></div>
+
+      </div>
+    </>
   );
 }
