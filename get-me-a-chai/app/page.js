@@ -15,11 +15,11 @@ export default function Home() {
           </div>
         </div>
         <div className="bg-white opacity-20 w-full h-1"></div>
-        <div className="container flex flex-col justify-center items-center mx-auto mt-15">
+        <div className="container flex flex-col justify-center items-center mx-auto mt-15 mb-30">
           <div className="title text-3xl font-bold">
             Your Fans can Buy you a Chai
           </div>
-          <div className="icons flex justify-between gap-50 mt-16 mb-30">
+          <div className="icons flex justify-between gap-50 mt-16 ">
             <div className="flex flex-col justify-center items-center gap-2">
               <img className='w-22 bg-white rounded-full p-2' src="/man.gif" alt="" />
               <p className="font-bold">Your fans want to Help</p>
@@ -38,7 +38,14 @@ export default function Home() {
           </div>
 
         </div>
-          <div className="bg-white opacity-20 w-full h-1"></div>
+        <div className="bg-white opacity-20 w-full h-1"></div>
+
+        <div className="video-box container flex flex-col justify-center items-center mx-auto mt-15 mb-30">
+          <div className="title text-3xl font-bold mb-16">
+            Learn more about us
+          </div>
+          <iframe width="700" height="400" src="https://www.youtube.com/embed/QtaorVNAwbI?si=IemLhRw8zBX_F9XL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
 
       </div>
     </>
