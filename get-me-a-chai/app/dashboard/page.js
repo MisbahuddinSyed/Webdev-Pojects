@@ -1,24 +1,18 @@
-"use client"
-import React from 'react'
-import { useSession, signIn, signOut } from "next-auth/react"
-import { useRouter } from 'next/navigation'
+import { auth } from "@/auth"
+import { redirect } from "next/navigation"
 
+const Dashboard = async () => {
 
-
-const Dashboard = () => {
-
-    const { data: session, status } = useSession()
-    const router = useRouter()
-    
+    const session = await auth()
 
     if (!session) {
-        return null
+        redirect("/login")
     }
 
     return (
-        <div className='container mx-auto flex flex-col items-center gap-14 mt-20'>
-            <h2 className="title text-3xl font-bold">
-                Welcome Back {session.user.name} !
+        <div>
+            <h2>
+                Welcome Back {session.user?.name}!
             </h2>
         </div>
     )

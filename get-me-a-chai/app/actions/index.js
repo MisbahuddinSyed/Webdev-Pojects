@@ -1,0 +1,18 @@
+"use server"
+import { signIn, signOut } from "@/auth"
+export async function doCredentialsLogin(formData){
+     await signIn("credentials", {email: formData.get("email"),
+        password: formData.get("password"),
+        redirectTo: '/dashboard'
+    })
+    
+}
+
+export async function doSocialLogin(formData){
+    const action = formData.get('action')
+    await signIn(action, {redirectTo: '/dashboard'})
+}
+
+export async function Logout(){
+    await signOut({redirectTo: '/'})
+}

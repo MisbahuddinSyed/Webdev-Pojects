@@ -1,10 +1,15 @@
 "use client"
 import React from 'react'
 import Link from 'next/link'
-import { useSession, signIn, signOut } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
+
+
 
 const Navbar = () => {
-  const { data: session } = useSession()
+
+   const { data: session, status } = useSession()
+
+  
 
   return (
     <nav className='bg-slate-950 text-white flex justify-between items-center p-2 px-5'>
@@ -32,7 +37,7 @@ const Navbar = () => {
           <li>
             {session ? (
               <button
-                onClick={() => signOut({ callbackUrl: "/login" })}
+                onClick={() => signOut({ callbackUrl: "/" })}
                 className="rounded-lg text-white bg-gradient-to-br from-purple-600 to-blue-500 px-4 py-2.5"
               >
                 Logout

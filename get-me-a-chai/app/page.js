@@ -44,7 +44,16 @@ export default function Home() {
           <div className="title text-3xl font-bold mb-16">
             Learn more about us
           </div>
-          <iframe width="700" height="400" src="https://www.youtube.com/embed/QtaorVNAwbI?si=IemLhRw8zBX_F9XL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <div className="w-full max-w-3xl aspect-video">
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/QtaorVNAwbI?si=IemLhRw8zBX_F9XL"
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
         </div>
 
       </div>
