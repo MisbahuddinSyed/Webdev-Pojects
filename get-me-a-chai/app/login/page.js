@@ -4,9 +4,14 @@ import React from 'react'
 import { doSocialLogin } from '../actions'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const Login = () => {
+
+    useEffect(() => {
+      document.title = 'Login-User Credentials'
+    }, [])
+    
 
     const [error, seterror] = useState("")
     const router = useRouter();

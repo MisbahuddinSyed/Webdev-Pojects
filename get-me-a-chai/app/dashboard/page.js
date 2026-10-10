@@ -18,6 +18,17 @@ const Dashboard = () => {
         }
     }, [status])
 
+    useEffect(() => {
+
+
+        return () => {
+
+            document.title = 'Dashboard-Create you account';
+
+        }
+    }, [])
+
+
 
 
     const [name, setName] = useState('')
@@ -26,6 +37,7 @@ const Dashboard = () => {
     const [imgURL, setImgURL] = useState('')
     const [coverURL, setCoverURL] = useState('')
     const [emailError, setEmailError] = useState('')
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
