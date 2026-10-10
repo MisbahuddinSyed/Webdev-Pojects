@@ -3,33 +3,33 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-const Nav = ({ username }) => {
+const Nav = ({ user}) => {
   const pathname = usePathname()
 
   return (
     <nav className="flex gap-10 text-lg">
       <Link
-        href={`/${username}/`}
+        href={`/${user.username}/`}
         className={
-          pathname === `/${username}` ? "text-purple-300 border-b-2" : ""
+          pathname === `/${user.username}` ? "text-purple-300 border-b-2" : ""
         }
       >
         Home
       </Link>
 
       <Link
-        href={`/${username}/chat`}
+        href={`/${user.username}/chat`}
         className={
-          pathname === `/${username}/chat` ? "text-purple-300 border-b-2" : ""
+          pathname === `/${user.username}/chat` ? "text-purple-300 border-b-2" : ""
         }
       >
         Chats
       </Link>
 
       <Link
-        href={`/${username}/about`}
+        href={`/${user.username}/about`}
         className={
-          pathname === `/${username}/about` ? "text-purple-300 border-b-2" : ""
+          pathname === `/${user.username}/about` ? "text-purple-300 border-b-2" : ""
         }
       >
         About

@@ -2,12 +2,12 @@
 import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
-  username: {type:string , required:true},
-  name: String,
-  email: { type: String, required: true },
-  image: String,
-  followers: String
+  username: {type: String , required: true},
+  name: {type: String , required: true},
+  email: { type: String, required:  true },
+  imgURL: {type: String , required: true},
+  coverURL: {type: String , required: true}
 
-}, { timestamps: true });
+}, { timestamps:  true });
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);

@@ -1,14 +1,15 @@
+"use client"
 import React from 'react'
+import { useUser } from './UserProvider'
 
-const home = async({params})=> {
-        const {username} = await params
+const Home = ()=> {
+  const user = useUser()
 
-  return (
-    <div>
-      Hi iam {username}' home!
-    </div>
-  )
-}
+        return (
+        <>
+            <div>Hi i am {user.name}</div>
+        </>
+    )}
 
-export default home
+export default Home
 
