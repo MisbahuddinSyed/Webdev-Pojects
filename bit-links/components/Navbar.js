@@ -1,7 +1,7 @@
 import React from 'react'
-import localfont from 'next/font/local';
+import localFont from 'next/font/local';
 
-const boldPoppins = localfont({
+const boldPoppins = localFont({
   src: '../app/fonts/Poppins-Bold.ttf',
   variable: '--font-boldPoppins',
   weight: '100 900'

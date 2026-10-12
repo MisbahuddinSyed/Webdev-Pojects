@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
     await dbConnect();
-    const shortUrls = await Url.find({});
+    const shortUrls = await Url.findOne({ shortUrl });
     return Response.json({ shortUrls });
 }
 
@@ -15,12 +15,26 @@ export async function POST(request) {
     await dbConnect();
 
     const { url, shortUrl } = body;
-    const data = await Url.create({ url, shortUrl });
+    await Url.create({ url, shortUrl });
     return NextResponse.json(
         {
             success: true,
-            message: 'short url created sucessfully'
+            message: 'short url created sucessfully',
         },
         { status: 201 }
     );
 }
+// export async function POST(request) {
+
+
+//     await dbConnect();
+
+//     const { shortUrl } = await request.json()
+//     const result = await Url.findOne({ shortUrl });
+//     return NextResponse.json(
+//         {
+//             result
+//         },
+//         { status: 201 }
+//     );
+// }
