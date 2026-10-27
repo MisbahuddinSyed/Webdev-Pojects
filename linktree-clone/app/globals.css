@@ -1,2 +1,40 @@
+
 @import "tailwindcss";
 
+@keyframes scroll-up {
+    0%, 20% {
+        transform: translateY(0);
+    }
+
+    25% {
+        transform: translateY(-424px);
+    }
+
+    45% {
+        transform: translateY(-424px);
+    }
+
+    50% {
+        transform: translateY(-848px);
+    }
+
+    70% {
+        transform: translateY(-848px);
+    }
+
+    75% {
+        transform: translateY(-1272px);
+    }
+
+    95% {
+        transform: translateY(-1272px);
+    }
+
+    100% {
+        transform: translateY(-1696px);
+    }
+}
+
+.animate-scroll-up {
+    animation: scroll-up 20s ease-in-out infinite;
+}

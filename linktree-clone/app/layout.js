@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
 
-      <body className="flex flex-col items-center bg-[#254f1a]">
+      <body className="h-screen flex flex-col items-center ">
         <Navbar/>
         {children}
         </body>
