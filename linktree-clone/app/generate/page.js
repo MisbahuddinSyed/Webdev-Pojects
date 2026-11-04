@@ -4,13 +4,14 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
+import { useSearchParams } from 'next/navigation'
 
 
 const page = () => {
 
-
+  const searchParams = useSearchParams();
   const [links, setLinks] = useState([{ linkText: "", link: "" }])
-  const [handle, setHandle] = useState('')
+  const [handle, setHandle] = useState(searchParams.get('handle'))
   const [pic, setPic] = useState("")
 
   const addLink = () => {
@@ -40,6 +41,19 @@ const page = () => {
     console.log(response.data);
     if (response.data.success === true) {
       toast.success('Wow so easy!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+
+    else {
+      toast.error('Handle already taken!', {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

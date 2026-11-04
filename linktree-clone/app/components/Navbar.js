@@ -1,10 +1,16 @@
-import React from 'react'
+"use client"
 
+import React from 'react'
+import { usePathname } from 'next/navigation'
 
 
 const Navbar = () => {
-  return (
-    <div className='flex gap-14 bg-white text-black fixed z-50 w-[80vw] top-[5vh] py-4 px-8 rounded-full'>
+
+  const pathname = usePathname();
+  const showNavbar = ['/', '/generate'].includes(pathname);
+
+  return (<>
+   {showNavbar && <div className='flex gap-14 bg-white text-black fixed z-50 w-[80vw] top-[5vh] py-4 px-8 rounded-full'>
 
       <div className='flex justify-centre items-center'>
         <span className="text-3xl font-medium">BitTree </span>
@@ -24,7 +30,8 @@ const Navbar = () => {
         <button className='bg-gray-900 text-white px-8 py-4 rounded-full'>Sign up free</button>
       </div>
 
-    </div>
+    </div>}
+  </>
   )
 }
 
